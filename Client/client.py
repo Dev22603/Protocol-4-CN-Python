@@ -46,7 +46,7 @@ def receiver():
             client.send(pickle.dumps(ack))
             # print(pickle.dumps(ack))
             frame_expected = (frame_expected + 1) % (MAX_SEQ + 1)
-            time.sleep(1)
+            time.sleep(2)
 
 
 

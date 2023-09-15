@@ -122,10 +122,11 @@ def server():
         pickled_frame1=pickle.dumps(frame1)
         conn.send(pickled_frame1)
         print("Sending data frame: ",pickle.loads(pickled_frame1).data)
-        time.sleep(2)
+        time.sleep(1)
         ack_received = False
         while not ack_received:
-            server.settimeout(5)
+            conn.settimeout(5)
+            # server.settimeout(5)
             try:
                 # ack_packet, addr = server.recvfrom(FRAME_SIZE)
                 ack_packet = conn.recv(FRAME_SIZE)
