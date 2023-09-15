@@ -136,6 +136,7 @@ def server():
                     ack_received = True
                     next_frame_to_send = (next_frame_to_send + 1) % (MAX_SEQ + 1)
                     print(f"Acknowledgment received for sequence {ack.seq}")
+                    receive_file.write(ack.data+" ")    # modification for writing to 
                     i+=1
             except socket.timeout:
                 print("Timeout. Resending...")

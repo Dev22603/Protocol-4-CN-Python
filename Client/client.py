@@ -30,7 +30,11 @@ def receiver():
     #         receiver_socket.sendto(pickle.dumps(ack), ('localhost', 12345))
     #         frame_expected = (frame_expected + 1) % (MAX_SEQ + 1)
     # send_file = open("client_send.txt", 'r')
-    # send_file = open("D:\College\B.Tech 3rd Year\Sem 5\CN\LAB\Practical_4\Python\Approach_3\Client\client_send.txt", 'a')
+    send_file = open("D:\College\B.Tech 3rd Year\Sem 5\CN\LAB\Practical_4\Python\Approach_3\Client\client_send.txt", 'r')
+    data=send_file.read()
+    data_list=data.split()
+    j=0
+
     while True:
         receive_file = open("D:\College\B.Tech 3rd Year\Sem 5\CN\LAB\Practical_4\Python\Approach_3\Client\client_receive.txt", 'a')
         receive_pickled = client.recv(1024)
@@ -42,10 +46,12 @@ def receiver():
             print(f"Received: {receive.data}")
             receive_file.write(receive.data+" ")
             receive_file.close()
-            ack = Frame(frame_expected, receive.seq, "")
+            ack = Frame(frame_expected, receive.seq, data_list[j])
+            # ack = Frame(frame_expected, receive.seq, "")
             client.send(pickle.dumps(ack))
             # print(pickle.dumps(ack))
             frame_expected = (frame_expected + 1) % (MAX_SEQ + 1)
+            j+=1
             time.sleep(2)
 
 
