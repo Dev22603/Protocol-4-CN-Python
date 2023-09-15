@@ -46,8 +46,8 @@ def receiver():
             print(f"Received: {receive.data}")
             receive_file.write(receive.data+" ")
             receive_file.close()
-            ack = Frame(frame_expected, receive.seq, data_list[j])
-            # ack = Frame(frame_expected, receive.seq, "")
+            ack = Frame(frame_expected, receive.seq, data_list[j]) #Piggibacking
+            # ack = Frame(frame_expected, receive.seq, "") no piggibacking
             client.send(pickle.dumps(ack))
             # print(pickle.dumps(ack))
             frame_expected = (frame_expected + 1) % (MAX_SEQ + 1)
