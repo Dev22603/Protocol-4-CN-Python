@@ -35,6 +35,9 @@ def receiver():
     data_list=data.split()
     j=0
 
+    error=3
+    k=2
+    b=0
     while True:
         receive_file = open("D:\College\B.Tech 3rd Year\Sem 5\CN\LAB\Practical_4\Python\Approach_3\Client\client_receive.txt", 'a')
         receive_pickled = client.recv(1024)
@@ -46,6 +49,12 @@ def receiver():
             print(f"Received: {receive.data}")
             receive_file.write(receive.data+" ")
             receive_file.close()
+            if j==k and b==0:
+                b=1
+                ack = Frame(error, receive.seq, "ERROR") #Piggibacking
+                client.send(pickle.dumps(ack))
+                frame_expected = (frame_expected + 1) % (MAX_SEQ + 1)
+                
             ack = Frame(frame_expected, receive.seq, data_list[j]) #Piggibacking
             # ack = Frame(frame_expected, receive.seq, "") no piggibacking
             client.send(pickle.dumps(ack))
