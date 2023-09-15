@@ -1,1 +1,1 @@
-ClientsendingframestoServerClient sending frames to Server Client sending frames to Server 
+Client sending frames to Server 

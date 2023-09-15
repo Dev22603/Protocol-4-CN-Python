@@ -126,9 +126,7 @@ def server():
         ack_received = False
         while not ack_received:
             conn.settimeout(5)
-            # server.settimeout(5)
             try:
-                # ack_packet, addr = server.recvfrom(FRAME_SIZE)
                 ack_packet = conn.recv(FRAME_SIZE)
                 ack = pickle.loads(ack_packet)
                 # print(ack.seq,ack.ack,ack.data)
